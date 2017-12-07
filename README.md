@@ -1,2 +1,2 @@
 # Docker
-Arquivos relativos ao uso de Docker. Propósito é servir de referência compartilhada.
+Arquivos relativos ao uso de Docker. Propósito é compartilhar referências e experiências.
