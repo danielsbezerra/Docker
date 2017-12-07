@@ -1,0 +1,4 @@
+$ docker run --name mssql-replica -v /var/opt/mssql/data:/var/opt/mssql/data -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Senh@Mssql' -p 1433:1433 -d microsoft/mssql-server-linux:latest
+
+--Arquivos de dados em outro host que não o Docker Host (requer previamente no host: sudo mount.cifs //gtidbezerra/e$ ./gtidbezerra-drv-e -o user=dbezerra)
+$ docker run --name mssql-replica2 -v /home/dbezerra/gtidbezerra-drv-e/Bancos:/var/opt/mssql/data -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Senh@Mssql' -p 1433:1433 -d microsoft/mssql-server-linux:latest

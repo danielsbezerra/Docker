@@ -1,0 +1,29 @@
+===CONTAINER MARIABD
+--Sem senha
+$ docker run --name mariadb-glpi -v /var/opt/mariadb/data:/var/opt/mariadb/data -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -e MYSQL_DATABASE=glpi -p 3306:3306 -d mariadb
+
+--Com senha
+$ docker run --name mariadb-glpi -v /var/opt/mariadb/data:/var/opt/mariadb/data -e MYSQL_ROOT_PASSWORD=Senh@Maria -e MYSQL_DATABASE=glpi -p 3306:3306 -d mariadb
+
+--Resuatura banco GLPI sem senha
+$ docker exec -it idcontainer /bin/bash
+$ mysql glpi < /var/opt/mariadb/data/banco_glpi.sql
+--Resuatura banco GLPI com senha
+$ mysql -p glpi < /var/opt/mariadb/data/banco_glpi.sql
+
+--Comandos no MariaDB
+mysql -p
+show databases
+use glpi
+show tables
+--Cria usuário se instanciou sem senha
+CREATE USER 'usr_glpi'@'localhost' IDENTIFIED BY 'Senh@Glpi';
+GRANT ALL PRIVILEGES ON * . * TO 'usr_glpi';
+
+
+
+
+===CONTAINER GLPI
+--Sobe o novo container e o liga ao container mariadb-glpi criado anteriormente
+$ docker run --name glpi --link mariadb-glpi:mariadb -p 80:80 -d diouxx/glpi
+
